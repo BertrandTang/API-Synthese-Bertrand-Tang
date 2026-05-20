@@ -22,7 +22,7 @@ class ShoppingListController extends Controller
 
         Gate::authorize('view', $shoppingList);
 
-        return new ShoppingListResource($shoppingList);
+        return (new ShoppingListResource($shoppingList))->response();
     }
 
     public function storeItem(Request $request): JsonResponse
@@ -48,7 +48,7 @@ class ShoppingListController extends Controller
 
         $item->update($validated);
 
-        return new ItemResource($item);
+        return (new ItemResource($item))->response();
     }
 
     public function destroyItem(Item $item): JsonResponse
