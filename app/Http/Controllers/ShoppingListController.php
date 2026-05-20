@@ -15,7 +15,8 @@ class ShoppingListController extends Controller
     {
         $shoppingList = $request->user()
             ->shoppingList()
-            ->with('items')
+            ->select(['id', 'user_id', 'created_at', 'updated_at'])
+            ->with(['items' => fn ($query) => $query->select(['id', 'name', 'shopping_list_id'])])
             ->first();
 
         abort_if($shoppingList === null, 404);

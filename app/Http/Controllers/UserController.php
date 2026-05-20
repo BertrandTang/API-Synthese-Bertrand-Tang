@@ -17,8 +17,6 @@ class UserController extends Controller
         ]);
 
         $user = User::create($validated);
-        // Création automatique de la liste de course
-        $user->shoppingList()->create();
 
         return response()->json([
             'message' => 'User created successfully',
