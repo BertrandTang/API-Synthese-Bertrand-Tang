@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ItemResource;
+use App\Http\Resources\ShoppingListResource;
 use App\Models\Item;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,7 +22,7 @@ class ShoppingListController extends Controller
 
         Gate::authorize('view', $shoppingList);
 
-        return response()->json($shoppingList);
+        return new ShoppingListResource($shoppingList);
     }
 
     public function storeItem(Request $request): JsonResponse
@@ -33,7 +35,7 @@ class ShoppingListController extends Controller
 
         $item = $shoppingList->items()->create($validated);
 
-        return response()->json($item, 201);
+        return (new ItemResource($item))->response()->setStatusCode(201);
     }
 
     public function updateItem(Request $request, Item $item): JsonResponse
@@ -46,7 +48,7 @@ class ShoppingListController extends Controller
 
         $item->update($validated);
 
-        return response()->json($item);
+        return new ItemResource($item);
     }
 
     public function destroyItem(Item $item): JsonResponse
