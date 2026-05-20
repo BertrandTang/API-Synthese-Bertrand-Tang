@@ -18,10 +18,22 @@ class ItemResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             '_links' => [
-                'self' => ['href' => $itemUrl, 'method' => 'GET'],
-                'update' => ['href' => $itemUrl, 'method' => 'PUT'],
-                'delete' => ['href' => $itemUrl, 'method' => 'DELETE'],
-                'list' => ['href' => route('list.show'), 'method' => 'GET'],
+                'self' => [
+                    'href' => $itemUrl,
+                    'method' => 'GET',
+                ],
+                'update' => [
+                    'href' => $itemUrl,
+                    'method' => 'PUT',
+                ],
+                'delete' => [
+                    'href' => $itemUrl,
+                    'method' => 'DELETE',
+                ],
+                'list' => [
+                    'href' => route('list.show'),
+                    'method' => 'GET',
+                ],
             ],
         ];
     }

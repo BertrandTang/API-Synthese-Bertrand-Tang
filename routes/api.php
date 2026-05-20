@@ -5,8 +5,10 @@ use App\Http\Controllers\ShoppingListController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::post('/register', [UserController::class, 'register'])->name('register');
-Route::post('/login', [UserController::class, 'login'])->name('login');
+Route::middleware('throttle:8,1')->group(function () {
+    Route::post('/register', [UserController::class, 'register'])->name('register');
+    Route::post('/login', [UserController::class, 'login'])->name('login');
+});
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');

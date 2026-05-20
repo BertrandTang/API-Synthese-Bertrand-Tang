@@ -18,8 +18,14 @@ class ShoppingListResource extends JsonResource
             'updated_at' => $this->updated_at?->utc()->format('Y-m-d\TH:i:s\Z'),
             'items' => ItemResource::collection($this->whenLoaded('items')),
             '_links' => [
-                'self' => ['href' => route('list.show'), 'method' => 'GET'],
-                'add_item' => ['href' => route('items.store'), 'method' => 'POST'],
+                'self' => [
+                    'href' => route('list.show'),
+                    'method' => 'GET',
+                ],
+                'add_item' => [
+                    'href' => route('items.store'),
+                    'method' => 'POST',
+                ],
             ],
         ];
     }
